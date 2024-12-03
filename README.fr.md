@@ -1,8 +1,10 @@
 # Chatbot Mistral
 
-Application de chat propulsée par **Mistral AI**, développée avec **Next.js 14**, **NextAuth**, **MongoDB** et **Tailwind CSS**.
+Application de chat propulsée par un grand modèle de langage (LLM), permettant des interactions IA contextuelles directement dans le navigateur.
 
 [Read in English](README.md)
+
+![Screenshot](docs/screenshot.png)
 
 ## Fonctionnalités
 

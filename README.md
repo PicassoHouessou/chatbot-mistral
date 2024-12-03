@@ -1,8 +1,10 @@
 # Chatbot Mistral
 
-A conversational web application powered by **Mistral AI**, built with **Next.js 14**, **NextAuth**, **MongoDB**, and **Tailwind CSS**.
+A conversational web application powered by a large language model (LLM), enabling context-aware AI interactions directly in the browser.
 
 [Lire en français](README.fr.md)
+
+![Screenshot](docs/screenshot.png)
 
 ## Features
 
