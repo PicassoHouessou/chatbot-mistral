@@ -257,7 +257,7 @@ export default function ChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden px-4 md:px-6 py-6">
           {!currentConv || currentConv.messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center">
               <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center border border-orange-500/20 mb-6">

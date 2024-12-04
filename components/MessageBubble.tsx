@@ -21,7 +21,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
   };
 
   return (
-    <div className={`flex gap-3 group ${isUser ? "flex-row-reverse" : "flex-row"}`}>
+    <div className={`flex gap-3 group min-w-0 ${isUser ? "flex-row-reverse" : "flex-row"}`}>
       {/* Avatar */}
       <div
         className={`w-8 h-8 rounded-xl flex items-center justify-center flex-shrink-0 ${
@@ -38,12 +38,12 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
       </div>
 
       {/* Bubble */}
-      <div className={`max-w-[75%] ${isUser ? "items-end" : "items-start"} flex flex-col gap-1`}>
+      <div className={`max-w-[75%] min-w-0 ${isUser ? "items-end" : "items-start"} flex flex-col gap-1`}>
         <span className={`text-xs font-medium ${isUser ? "text-orange-400 text-right" : "text-gray-400"}`}>
           {isUser ? "Vous" : "Mistral"}
         </span>
         <div
-          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed break-words overflow-x-auto ${
             isUser
               ? "bg-orange-500 text-white rounded-tr-sm"
               : "bg-gray-800 text-gray-200 border border-gray-700 rounded-tl-sm"
