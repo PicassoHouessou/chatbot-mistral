@@ -43,7 +43,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
           {isUser ? "Vous" : "Mistral"}
         </span>
         <div
-          className={`rounded-2xl px-4 py-3 text-sm leading-relaxed break-words overflow-x-auto ${
+          className={`max-w-[100%] rounded-2xl px-4 py-3 text-sm leading-relaxed break-words overflow-hidden ${
             isUser
               ? "bg-orange-500 text-white rounded-tr-sm"
               : "bg-gray-800 text-gray-200 border border-gray-700 rounded-tl-sm"
@@ -75,6 +75,13 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
                     {children}
                   </a>
                 ),
+                pre: ({ children }) => (
+                  <div className="overflow-x-auto my-2">
+                    <pre className="bg-gray-900 border border-gray-700 rounded-lg p-3 w-max min-w-full">
+                      {children}
+                    </pre>
+                  </div>
+                ),
                 code: ({ inline, children }: any) => {
                   if (inline) {
                     return (
@@ -84,9 +91,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
                     );
                   }
                   return (
-                    <pre className="bg-gray-900 border border-gray-700 rounded-lg p-3 overflow-x-auto my-2">
-                      <code className="text-xs text-gray-200 font-mono">{children}</code>
-                    </pre>
+                    <code className="text-xs text-gray-200 font-mono">{children}</code>
                   );
                 },
                 table: ({ children }) => (
