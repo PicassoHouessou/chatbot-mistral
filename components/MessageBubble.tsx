@@ -75,7 +75,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
                     {children}
                   </a>
                 ),
-                code: ({ inline, className, children }: any) => {
+                code: ({ inline, children }: any) => {
                   if (inline) {
                     return (
                       <code className="bg-gray-900 text-orange-300 px-1.5 py-0.5 rounded text-xs font-mono">
@@ -114,7 +114,7 @@ export default function MessageBubble({ message }: MessageBubbleProps) {
 
         {/* Actions (for assistant only) */}
         {!isUser && (
-          <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition">
+          <div className="flex items-center gap-1 transition [@media(hover:hover)]:opacity-0 [@media(hover:hover)]:group-hover:opacity-100">
             <button
               onClick={copyToClipboard}
               className="flex items-center gap-1 text-gray-600 hover:text-gray-300 text-xs px-2 py-1 rounded-lg hover:bg-gray-800 transition"
