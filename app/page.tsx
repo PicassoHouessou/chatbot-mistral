@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Send, Loader2, Bot, Sparkles } from "lucide-react";
+import { Send, Loader2, Bot, Sparkles, Menu } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import MessageBubble from "@/components/MessageBubble";
 import { Conversation, Message } from "@/types";
@@ -30,6 +30,7 @@ export default function ChatPage() {
   const [currentConvId, setCurrentConvId] = useState<string | null>(null);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -210,6 +211,14 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-screen bg-gray-950 overflow-hidden">
+      {/* Mobile overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       <Sidebar
         conversations={conversations}
         currentConvId={currentConvId}
@@ -218,12 +227,20 @@ export default function ChatPage() {
         onDelete={handleDeleteConversation}
         userName={user.name || "Utilisateur"}
         userPseudo={user.pseudo || user.email || "user"}
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
       />
 
-      <div className="flex-1 flex flex-col h-full">
+      <div className="flex-1 flex flex-col h-full min-w-0">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-gray-800 bg-gray-900/50 backdrop-blur">
+        <div className="px-4 md:px-6 py-4 border-b border-gray-800 bg-gray-900/50 backdrop-blur">
           <div className="flex items-center gap-3">
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="md:hidden text-gray-400 hover:text-white transition"
+            >
+              <Menu size={20} />
+            </button>
             <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center border border-orange-500/30">
               <Bot size={16} className="text-orange-400" />
             </div>
@@ -240,7 +257,7 @@ export default function ChatPage() {
         </div>
 
         {/* Messages */}
-        <div className="flex-1 overflow-y-auto px-6 py-6">
+        <div className="flex-1 overflow-y-auto px-4 md:px-6 py-6">
           {!currentConv || currentConv.messages.length === 0 ? (
             <div className="h-full flex flex-col items-center justify-center text-center">
               <div className="w-16 h-16 bg-orange-500/10 rounded-2xl flex items-center justify-center border border-orange-500/20 mb-6">
@@ -253,7 +270,7 @@ export default function ChatPage() {
                 Je suis votre assistant IA propulsé par Mistral. Posez-moi
                 n&apos;importe quelle question, je suis là pour vous aider.
               </p>
-              <div className="grid grid-cols-2 gap-3 w-full max-w-lg">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-lg">
                 {SUGGESTED_PROMPTS.map((prompt) => (
                   <button
                     key={prompt}
@@ -290,7 +307,7 @@ export default function ChatPage() {
         </div>
 
         {/* Input */}
-        <div className="px-6 py-4 border-t border-gray-800 bg-gray-900/50 backdrop-blur">
+        <div className="px-4 md:px-6 py-4 border-t border-gray-800 bg-gray-900/50 backdrop-blur">
           <div className="max-w-3xl mx-auto">
             <div className="flex items-end gap-3 bg-gray-800 border border-gray-700 focus-within:border-orange-500/50 rounded-2xl px-4 py-3 transition">
               <textarea

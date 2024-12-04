@@ -12,6 +12,8 @@ interface SidebarProps {
   onDelete: (id: string) => void;
   userName: string;
   userPseudo: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
 export default function Sidebar({
@@ -22,9 +24,18 @@ export default function Sidebar({
   onDelete,
   userName,
   userPseudo,
+  isOpen,
+  onClose,
 }: SidebarProps) {
   return (
-    <div className="w-64 bg-gray-900 border-r border-gray-800 flex flex-col h-full">
+    <div
+      className={`
+        fixed inset-y-0 left-0 z-50 w-64 bg-gray-900 border-r border-gray-800 flex flex-col h-full
+        transform transition-transform duration-300 ease-in-out
+        md:relative md:translate-x-0
+        ${isOpen ? "translate-x-0" : "-translate-x-full"}
+      `}
+    >
       {/* Header */}
       <div className="p-4 border-b border-gray-800">
         <div className="flex items-center gap-3 mb-4">
@@ -62,7 +73,7 @@ export default function Sidebar({
                     ? "bg-orange-500/15 border border-orange-500/30"
                     : "hover:bg-gray-800 border border-transparent"
                 }`}
-                onClick={() => onSelect(conv.id)}
+                onClick={() => { onSelect(conv.id); onClose(); }}
               >
                 <MessageSquare
                   size={14}
